@@ -39,4 +39,11 @@ public class ProdutosController {
     public void deletaProduto(@PathVariable("id") Long idProduto) {
         produtoService.deletaProdutoPorId(idProduto);
     }
+
+    @PatchMapping("/altera/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alteraDadosDoProduto(@PathVariable("id") Long idProduto,
+                                     @RequestBody ProdutoAlteracaoRequest alteracaoRequest) {
+        produtoService.alteraProduto(idProduto, alteracaoRequest);
+    }
 }

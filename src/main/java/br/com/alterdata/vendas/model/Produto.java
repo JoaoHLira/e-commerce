@@ -1,5 +1,6 @@
 package br.com.alterdata.vendas.model;
 
+import br.com.alterdata.vendas.controller.ProdutoAlteracaoRequest;
 import br.com.alterdata.vendas.controller.ProdutoRequest;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -38,5 +39,12 @@ public class Produto {
         this.descricao = produto.getDescricao();
         this.referencia = produto.getReferencia();
         this.valorUnitario = produto.getValorUnitario();
+    }
+
+    public void alteraDadosDoProduto(ProdutoAlteracaoRequest alteracaoRequest) {
+        this.nome = alteracaoRequest.getNome();
+        this.descricao = alteracaoRequest.getDescricao();
+        this.referencia = alteracaoRequest.getReferencia();
+        this.valorUnitario = alteracaoRequest.getValorUnitario();
     }
 }

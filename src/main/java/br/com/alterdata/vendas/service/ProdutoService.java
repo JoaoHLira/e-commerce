@@ -1,5 +1,6 @@
 package br.com.alterdata.vendas.service;
 
+import br.com.alterdata.vendas.controller.ProdutoAlteracaoRequest;
 import br.com.alterdata.vendas.controller.ProdutoDetalhadoResponse;
 import br.com.alterdata.vendas.controller.ProdutoRequest;
 import br.com.alterdata.vendas.controller.ProdutoResponse;
@@ -35,5 +36,11 @@ public class ProdutoService {
     public void deletaProdutoPorId(Long idProduto) {
         Produto produto = produtoRepository.buscaProdutoPorId(idProduto);
         produtoRepository.deletaProduto(produto);
+    }
+
+    public void alteraProduto(Long idProduto, ProdutoAlteracaoRequest alteracaoRequest) {
+        Produto produto = produtoRepository.buscaProdutoPorId(idProduto);
+        produto.alteraDadosDoProduto(alteracaoRequest);
+        produtoRepository.salvaProduto(produto);
     }
 }
