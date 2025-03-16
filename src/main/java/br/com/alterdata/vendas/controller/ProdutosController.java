@@ -30,7 +30,7 @@ public class ProdutosController {
 
     @GetMapping("/busca/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ProdutoDetalhadoResponse buscaProduto(@Valid @PathVariable("id") Long idProduto) {
+    public ProdutoDetalhadoResponse buscaProduto(@PathVariable("id") Long idProduto) {
         return produtoService.buscaProdutoPorId(idProduto);
     }
 }

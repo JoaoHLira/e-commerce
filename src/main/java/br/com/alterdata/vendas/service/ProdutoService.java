@@ -3,12 +3,13 @@ package br.com.alterdata.vendas.service;
 import br.com.alterdata.vendas.controller.ProdutoDetalhadoResponse;
 import br.com.alterdata.vendas.controller.ProdutoRequest;
 import br.com.alterdata.vendas.controller.ProdutoResponse;
+import br.com.alterdata.vendas.handler.APIException;
 import br.com.alterdata.vendas.model.Produto;
 import br.com.alterdata.vendas.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -26,9 +27,9 @@ public class ProdutoService {
         return new ProdutoResponse(produtoCriado);
     }
 
-    public ProdutoDetalhadoResponse buscaProdutoPorId(@Valid Long idProduto) {
+    public ProdutoDetalhadoResponse buscaProdutoPorId(Long idProduto) {
         Produto produto = produtoRepository.findById(idProduto)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
         return new ProdutoDetalhadoResponse(produto);
     }
 }
