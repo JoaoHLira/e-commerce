@@ -1,10 +1,13 @@
 package br.com.alterdata.vendas.service;
 
+import br.com.alterdata.vendas.controller.ProdutoRequest;
+import br.com.alterdata.vendas.controller.ProdutoResponse;
 import br.com.alterdata.vendas.model.Produto;
 import br.com.alterdata.vendas.repository.ProdutoRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProdutoService {
@@ -13,5 +16,10 @@ public class ProdutoService {
 
     public List<Produto> listar() {
         return produtoRepository.findAll();
+    }
+
+    public ProdutoResponse criaNovoProduto(ProdutoRequest request) {
+        Produto produtoCriado = produtoRepository.save(new Produto(request));
+        return new ProdutoResponse(produtoCriado);
     }
 }

@@ -1,12 +1,13 @@
 package br.com.alterdata.vendas.model;
 
+import br.com.alterdata.vendas.controller.ProdutoRequest;
 import com.sun.istack.NotNull;
-import java.math.BigDecimal;
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "produtos")
@@ -15,15 +16,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Produto {
 
-    @Id @GeneratedValue private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotNull private String nome;
+    @NotNull
+    private String nome;
 
-    @NotNull private String descricao;
+    @NotNull
+    private String descricao;
 
-    @NotNull private String referencia;
+    @NotNull
+    private String referencia;
 
     @NotNull
     @Column(name = "valor_unitario")
     private BigDecimal valorUnitario;
+
+    public Produto(ProdutoRequest produto) {
+        this.nome = produto.getNome();
+        this.descricao = produto.getDescricao();
+        this.referencia = produto.getReferencia();
+        this.valorUnitario =  produto.getValorUnitario();
+    }
 }
