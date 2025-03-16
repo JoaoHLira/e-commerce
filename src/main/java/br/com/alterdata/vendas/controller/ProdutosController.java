@@ -27,4 +27,10 @@ public class ProdutosController {
     public ProdutoResponse criaNovoProduto(@RequestBody @Valid ProdutoRequest request) {
         return produtoService.criaNovoProduto(request);
     }
+
+    @GetMapping("/busca/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProdutoDetalhadoResponse buscaProduto(@Valid @PathVariable("id") Long idProduto) {
+        return produtoService.buscaProdutoPorId(idProduto);
+    }
 }

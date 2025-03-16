@@ -37,6 +37,6 @@ public class Produto {
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
         this.referencia = produto.getReferencia();
-        this.valorUnitario =  produto.getValorUnitario();
+        this.valorUnitario = produto.getValorUnitario();
     }
 }
