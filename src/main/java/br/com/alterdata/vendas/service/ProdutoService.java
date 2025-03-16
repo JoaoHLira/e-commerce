@@ -19,17 +19,21 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public List<Produto> listar() {
-        return produtoRepository.findAll();
+        return produtoRepository.buscaTodosOsProdutos();
     }
 
     public ProdutoResponse criaNovoProduto(ProdutoRequest request) {
-        Produto produtoCriado = produtoRepository.save(new Produto(request));
+        Produto produtoCriado = produtoRepository.salvaProduto(new Produto(request));
         return new ProdutoResponse(produtoCriado);
     }
 
     public ProdutoDetalhadoResponse buscaProdutoPorId(Long idProduto) {
-        Produto produto = produtoRepository.findById(idProduto)
-                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+        Produto produto = produtoRepository.buscaProdutoPorId(idProduto);
         return new ProdutoDetalhadoResponse(produto);
+    }
+
+    public void deletaProdutoPorId(Long idProduto) {
+        Produto produto = produtoRepository.buscaProdutoPorId(idProduto);
+        produtoRepository.deletaProduto(produto);
     }
 }

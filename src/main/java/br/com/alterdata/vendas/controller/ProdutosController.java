@@ -33,4 +33,10 @@ public class ProdutosController {
     public ProdutoDetalhadoResponse buscaProduto(@PathVariable("id") Long idProduto) {
         return produtoService.buscaProdutoPorId(idProduto);
     }
+
+    @DeleteMapping("/deleta/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletaProduto(@PathVariable("id") Long idProduto) {
+        produtoService.deletaProdutoPorId(idProduto);
+    }
 }
